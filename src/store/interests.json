@@ -1,0 +1,34 @@
+{
+  "trip": {
+    "title": "Trip",
+    "image": "trip"
+  },
+  "winter": {
+    "title": "Winter",
+    "image": "winter"
+  },
+  "book": {
+    "title": "Books",
+    "image": "book"
+  },
+  "photos": {
+    "title": "Photos",
+    "image": "photos"
+  },
+  "music": {
+    "title": "Music",
+    "image": "music"
+  },
+  "food": {
+    "title": "Food",
+    "image": "food"
+  },
+  "games": {
+    "title": "Games",
+    "image": "games"
+  },
+  "manga": {
+    "title": "Mangas",
+    "image": "manga"
+  }
+}

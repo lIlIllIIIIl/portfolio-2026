@@ -1,0 +1,57 @@
+{
+  "memoria": {
+    "title": "Memoria",
+    "image": "memoria",
+    "date": "2026",
+    "tech": "Fullstack developer",
+    "description": "Memoria is a project that allows you to create a full movie enhanced with AI from your pictures.",
+    "live": "",
+    "len": 0
+  },
+  "artchive": {
+    "title": "Artchive",
+    "image": "artchive",
+    "date": "2024-25",
+    "tech": "Frontend developer",
+    "description": "Artchive is a personal project I created to display some of the drawings & illustrations I love from the artists I love.",
+    "live": "",
+    "len": 0
+  },
+  "cfdoc": {
+    "title": "cf.doc",
+    "image": "cfdoc",
+    "date": "2024",
+    "tech": "Fullstack developer w/ Yann Quillard",
+    "description": "cf.doc is my last school project. It's an AI tool that helps team to understand the technical knowledge.",
+    "live": "",
+    "len": 5
+  },
+  "pimpim": {
+    "title": "Pimpim's adventure",
+    "image": "pimpim",
+    "date": "2021",
+    "tech": "Unity developer (C#)",
+    "description": "PimPim’s adventure is a video game where you play as PimPim, a penguin who has to go through all four seasons to finally reach winter and his home.",
+    "live": "",
+    "len": 8
+  },
+
+  "aurore": {
+    "title": "Aurore",
+    "image": "aurore",
+    "date": "2021",
+    "tech": "Fullstack developer (low-code)",
+    "description": "Aurore is a low-code school project. It is a platform that allows you to rent house and apartments designed by architects and interior designers.",
+    "live": "",
+    "len": 4
+  },
+  "uso": {
+    "title": "USO",
+    "image": "uso",
+    "date": "2021",
+    "tech": "Fullstack developer w/ Jaël Beining",
+    "description": "USO is a tool that allows you to synchronize your Osu & spotify accounts to enhance your playlists.",
+    "live": "https://uso-psi.vercel.app/",
+    "len": 5
+  }
+}
