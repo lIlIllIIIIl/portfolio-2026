@@ -1,5 +1,5 @@
 <script setup>
-import interests from '../store/interests.json'
+import interests from '../../store/interests.json'
 
 const focused = ref(null)
 const interestsTitle = Object.keys(interests)

@@ -76,7 +76,7 @@ onMounted(() => {
               rel="noopener noreferrer"
               class="work-right__description__live"
             >
-              <img :src="`/images/works/${work.image}/icon.png`" />
+              <img class="live-icon" :src="`/images/works/${work.image}/1.png`" />
               <span>SEE LIVE</span>
             </a>
           </div>
@@ -276,6 +276,11 @@ onMounted(() => {
         span {
           position: relative;
           z-index: 1;
+        }
+
+        .live-icon {
+          width: 1rem;
+          border-radius: 100%;
         }
       }
     }

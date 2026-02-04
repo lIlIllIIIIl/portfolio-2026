@@ -112,6 +112,7 @@ const menuTransitionName = computed(() =>
       top: auto;
       bottom: 24px;
       height: auto;
+      width: auto;
     }
   }
 

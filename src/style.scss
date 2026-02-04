@@ -46,6 +46,9 @@
 
 body {
   margin: 0;
+  // cursor:
+  //   url("/images/cursor.svg") 2 2,
+  //   auto;
 }
 
 a {
@@ -68,9 +71,10 @@ p {
   color: #ffffff;
   letter-spacing: -0.2%;
   margin: 0;
-  &.opacity {
-    color: #ffffff40;
-  }
+}
+
+.opacity {
+  color: #ffffff40;
 }
 
 code,

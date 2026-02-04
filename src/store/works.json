@@ -14,7 +14,7 @@
     "date": "2024-25",
     "tech": "Frontend developer",
     "description": "Artchive is a personal project I created to display some of the drawings & illustrations I love from the artists I love.",
-    "live": "",
+    "live": "https://artchive-three.vercel.app/",
     "len": 0
   },
   "cfdoc": {

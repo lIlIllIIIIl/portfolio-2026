@@ -10,7 +10,7 @@ const isAbout = computed(() => route.name === 'about')
     <div class="global-menu__logo">
       <router-link to="/" class="global-menu__logo-link" aria-label="Accueil">
         <!-- <img class="global-menu__logo-image" src="/src/assets/logo.png" alt="logo" /> -->
-        <span>Alexis Kessab</span>
+        <span>Alexis<br />Kessab</span>
       </router-link>
     </div>
     <nav class="global-menu__nav" aria-label="Navigation principale">

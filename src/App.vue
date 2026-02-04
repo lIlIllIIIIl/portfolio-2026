@@ -2,6 +2,7 @@
 import GlobalMenu from './components/GlobalMenu.vue'
 import PageMenu from './components/PageMenu.vue'
 import ShaderBackground from './components/ShaderBackground.vue'
+import CopyFeedback from './components/CopyFeedback.vue'
 
 const activeAboutSection = ref(0)
 const aboutScrollDirection = ref('down')
@@ -18,6 +19,8 @@ provide('aboutScrollDirection', aboutScrollDirection)
     <PageMenu />
 
     <router-view />
+
+    <CopyFeedback />
   </div>
 </template>
 
