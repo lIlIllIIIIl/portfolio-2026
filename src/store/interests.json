@@ -1,14 +1,14 @@
 {
   "trip": {
-    "title": "Trip",
+    "title": "Travel",
     "image": "trip"
   },
   "winter": {
-    "title": "Winter",
+    "title": "Snowboard",
     "image": "winter"
   },
   "book": {
-    "title": "Books",
+    "title": "Thrillers",
     "image": "book"
   },
   "photos": {

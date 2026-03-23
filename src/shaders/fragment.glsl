@@ -29,20 +29,23 @@ void main() {
     vec2 uv = gl_FragCoord.xy / uResolution;
     float t = uTime * 0.9;
 
-    // Dégradé animé #020316 → #5F546A, variation surtout horizontale (comme fragment.glsl)
+    // Dégradé animé #020316 → #5F546A, variation surtout horizontale
     float n = 0.5
         + 0.25 * cos(t + uv.x * 1.2)
         + 0.18 * cos(t * 0.7 + uv.x * 0.6 + uv.y * 0.2)
         + 0.12 * cos(t * 0.4 + uv.x * 0.35);
-    // Tendance verticale : plus foncé en haut, plus clair en bas (haut toujours plus foncé)
+    // Tendance verticale : plus foncé en haut, plus clair en bas
     float verticalBias = 0.55;
     float topWeight = pow(uv.y, 2.0);
     n = n - verticalBias * topWeight;
     n = clamp(n, 0.0, 1.0);
+    // Contraste modéré (entre l’original et la version forte)
+    n = clamp((n - 0.5) * 1.2 + 0.5, 0.0, 1.0);
 
-    vec3 dark = vec3(0.008, 0.012, 0.086);   // #020316
-    vec3 violet = vec3(0.373, 0.329, 0.416); // #5F546A
+    vec3 dark = vec3(0.006, 0.01, 0.072);    // entre #020316 et version assombrie
+    vec3 violet = vec3(0.32, 0.28, 0.36);    // entre #5F546A et version assombrie
     vec3 col = mix(dark, violet, n);
+    col *= 0.96;  // Légèrement plus foncé que l’original, plus clair qu’avant
 
     // Couche type fumée : 8 sommets avec mouvement aléatoire (vitesse ralentie)
     float margin = -0.15;  // Marge négative pour permettre le mouvement hors écran

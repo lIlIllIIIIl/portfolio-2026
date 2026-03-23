@@ -9,8 +9,8 @@ const isAbout = computed(() => route.name === 'about')
   <header class="global-menu" role="banner">
     <div class="global-menu__logo">
       <router-link to="/" class="global-menu__logo-link" aria-label="Accueil">
-        <!-- <img class="global-menu__logo-image" src="/src/assets/logo.png" alt="logo" /> -->
         <span>Alexis Kessab</span>
+        <span class="opacity">Looking for a fulltime job as a front-end developer</span>
       </router-link>
     </div>
     <nav class="global-menu__nav" aria-label="Navigation principale">
@@ -54,8 +54,7 @@ const isAbout = computed(() => route.name === 'about')
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 48px;
-  padding-right: 48px;
+  padding: 0 2rem;
   box-sizing: border-box;
   height: 3.5rem;
   pointer-events: none;
@@ -71,8 +70,14 @@ const isAbout = computed(() => route.name === 'about')
   }
 
   &__logo-link {
-    font-family: "Geist Mono", ui-monospace, monospace;
-    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    line-height: 105%;
+    max-width: 200px;
+    font-family: "Geist", system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 0.75rem;
     letter-spacing: 0.05em;
     color: rgba(255, 255, 255, 0.87);
     text-decoration: none;
@@ -122,6 +127,7 @@ const isAbout = computed(() => route.name === 'about')
     &--close {
       grid-column: 4;
       text-align: right;
+      transition-delay: 0.06s;
     }
 
     /* Ligne 2 : on garde grid-row: 1 (non animable) et on décale avec transform */

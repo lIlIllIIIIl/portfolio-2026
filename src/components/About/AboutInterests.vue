@@ -1,5 +1,5 @@
 <script setup>
-import interests from '../store/interests.json'
+import interests from '../../store/interests.json'
 
 const focused = ref(null)
 const interestsTitle = Object.keys(interests)
@@ -31,7 +31,6 @@ function colEnter(col) {
       <div class="img-container">
         <img
           :src="`/images/interests/${entry[1].image}.jpg`"
-          :class="{ 'is-visible': focused?.title === entry[1].title }"
         />
       </div>
       <span :class="{ 'is-visible': focused?.title === entry[1].title }">{{ entry[1].title }}</span>
@@ -90,12 +89,7 @@ function colEnter(col) {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        opacity: 0;
         transition: opacity 0.15s ease;
-
-        &.is-visible {
-          opacity: 1;
-        }
       }
     }
 

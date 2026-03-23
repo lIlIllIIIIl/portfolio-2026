@@ -1,5 +1,7 @@
 <script setup>
-import AboutInterests from '../components/AboutInterests.vue'
+import AboutInterests from '../components/About/AboutInterests.vue'
+import AboutExperiences from '../components/About/AboutExperiences.vue'
+import AboutContact from '../components/About/AboutContact.vue'
 
 const activeAboutSection = inject('activeAboutSection')
 const aboutScrollDirection = inject('aboutScrollDirection')
@@ -61,11 +63,11 @@ onUnmounted(() => {
     </section>
 
     <section id="experiences" class="about-section">
-      <p>Experiences & background.</p>
+      <AboutExperiences />
     </section>
 
     <section id="contact" class="about-section">
-      <p>Get in touch.</p>
+      <AboutContact />
     </section>
   </div>
 </template>
