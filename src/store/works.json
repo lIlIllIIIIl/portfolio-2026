@@ -6,7 +6,8 @@
     "tech": "Fullstack developer",
     "description": "Memoria is a project that allows you to create a full movie enhanced with AI from your pictures.",
     "live": "",
-    "len": 0
+    "github": "",
+    "len": 4
   },
   "artchive": {
     "title": "Artchive",
@@ -15,7 +16,8 @@
     "tech": "Frontend developer",
     "description": "Artchive is a personal project I created to display some of the drawings & illustrations I love from the artists I love.",
     "live": "https://artchive-three.vercel.app/",
-    "len": 0
+    "github": "",
+    "len": 5
   },
   "cfdoc": {
     "title": "cf.doc",
@@ -24,6 +26,7 @@
     "tech": "Fullstack developer w/ Yann Quillard",
     "description": "cf.doc is my last school project. It's an AI tool that helps team to understand the technical knowledge.",
     "live": "",
+    "github": "",
     "len": 5
   },
   "pimpim": {
@@ -33,6 +36,7 @@
     "tech": "Unity developer (C#)",
     "description": "PimPim’s adventure is a video game where you play as PimPim, a penguin who has to go through all four seasons to finally reach winter and his home.",
     "live": "",
+    "github": "",
     "len": 8
   },
 
@@ -43,6 +47,7 @@
     "tech": "Fullstack developer (low-code)",
     "description": "Aurore is a low-code school project. It is a platform that allows you to rent house and apartments designed by architects and interior designers.",
     "live": "",
+    "github": "",
     "len": 4
   },
   "uso": {
@@ -52,6 +57,7 @@
     "tech": "Fullstack developer w/ Jaël Beining",
     "description": "USO is a tool that allows you to synchronize your Osu & spotify accounts to enhance your playlists.",
     "live": "https://uso-psi.vercel.app/",
+    "github": "https://github.com/lIlIllIIIIl/USO",
     "len": 5
   }
 }
