@@ -1,28 +1,10 @@
 <script setup>
 import IconExternalLink from '../icons/IconExternalLink.vue'
-import { useCopyFeedback } from '../../composables/useCopyFeedback'
 
 const email = 'alexis.kessab@gmail.com'
 
 const textGit = ' [ github       ]'
 const textLink = ' [ linkedin    ]'
-
-const { showFeedback, showHoverFeedback, hideFeedback } = useCopyFeedback()
-
-async function copyEmail(event) {
-  try {
-    await navigator.clipboard.writeText(email)
-  } catch {
-    const input = document.createElement('input')
-    input.value = email
-    input.setAttribute('readonly', '')
-    document.body.appendChild(input)
-    input.select()
-    document.execCommand('copy')
-    document.body.removeChild(input)
-  }
-  showFeedback(event)
-}
 </script>
 
 <template>
@@ -39,16 +21,7 @@ async function copyEmail(event) {
       <div class="contact__details-mail">
         <span>→ Reach out at</span>
 
-        <div
-          class="opacity hover"
-          role="button"
-          tabindex="0"
-          @click="copyEmail($event)"
-          @mouseenter="showHoverFeedback($event)"
-          @mouseleave="hideFeedback()"
-          @keydown.enter="copyEmail($event)"
-          @keydown.space.prevent="copyEmail($event)"
-        >
+        <div class="opacity hover">
           <span> [ {{ email }}</span>
 
           <span class="bracket-close">

@@ -7,7 +7,7 @@ defineProps({
 })
 
 const emit = defineEmits(['close'])
-const workRightRef = ref(null)
+const workScrollRef = ref(null)
 const isClosing = ref(false)
 const isOpening = ref(false)
 
@@ -44,50 +44,51 @@ onMounted(() => {
         'work-container--closing': isClosing,
       }"
     >
-      <div class="work-header">
-        <h1 class="work-header__title">{{ work.title }}</h1>
-        <span class="work-header__close" @click="onCloseClick">{{ closeLabel }}</span>
-      </div>
-
-      <div class="work-content">
-        <div class="work-left">
-          <div class="work-left__description">
-            <span>{{ work.date }}</span>
-            <span>[{{ work.tech }}]</span>
-          </div>
-
-          <div class="work-left__preview">
-            <ScrollPreview
-              :scroll-container-ref="workRightRef"
-              :image-folder="work.image"
-              :image-count="work.len"
-            />
-          </div>
+      <div ref="workScrollRef" class="work-scroll">
+        <div class="work-header">
+          <h1 class="work-header__title">{{ work.title }}</h1>
+          <span class="work-header__close" @click="onCloseClick">{{ closeLabel }}</span>
         </div>
 
-        <div ref="workRightRef" class="work-right">
-          <div class="work-right__description">
-            <p>{{ work.description }}</p>
+        <div class="work-content">
+          <div class="work-left">
+            <div class="work-left__description">
+              <span>{{ work.date }}</span>
+              <span>[{{ work.tech }}]</span>
+              <!-- <a class="opacity hover" v-if="work.github" :href="work.github" target="_blank">the repo</a> -->
+            </div>
 
-            <a
-              v-if="work.live"
-              :href="work.live"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="work-right__description__live"
-            >
-              <img class="live-icon" :src="`/images/works/${work.image}/1.png`" />
-              <span>SEE LIVE</span>
-            </a>
+            <div class="work-left__preview">
+              <ScrollPreview
+                :scroll-container-ref="workScrollRef"
+                :image-folder="work.image"
+                :image-count="work.len"
+              />
+            </div>
           </div>
 
-          <div class="work-right__content">
-            <img v-for="i in work.len" v-bind:key="i" :src="`/images/works/${work.image}/${i}.png`" />
-          </div>
+          <div class="work-right">
+            <div class="work-right__description">
+              <p>{{ work.description }}</p>
 
+              <a
+                v-if="work.live"
+                :href="work.live"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="work-right__description__live"
+              >
+                <img class="live-icon" :src="`/images/works/${work.image}/button.png`" :alt="work.title" />
+                <span>SEE LIVE</span>
+              </a>
+            </div>
+
+            <div class="work-right__content">
+              <img v-for="i in work.len" v-bind:key="i" :src="`/images/works/${work.image}/${i}.png`" />
+            </div>
+          </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -116,17 +117,18 @@ onMounted(() => {
 
 .work-container {
   position: fixed;
-  z-index: 1;
+  z-index: 10000;
   background-color: #fff;
   color: black;
   width: 70vw;
   height: 100vh;
   right: 0;
   top: 0;
-  padding: 2rem;
+  padding: 0;
 
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
@@ -139,11 +141,24 @@ onMounted(() => {
     transform: translateX(100%);
   }
 
+  .work-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
+
   .work-header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    padding: 2rem 2rem 0;
+    mix-blend-mode: exclusion;
+    color: #ffffff;
 
     &__title {
       font-size: 2rem;
@@ -168,8 +183,8 @@ onMounted(() => {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
+  padding: 0 2rem 2rem;
+  gap: 2rem;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -179,12 +194,16 @@ onMounted(() => {
 }
 
   .work-left {
+    position: sticky;
+    top: 5rem;
+    align-self: flex-start;
     display: flex;
     flex-direction: column;
     gap: 10rem;
     padding-top: 4rem;
 
     @media (max-width: 768px) {
+      position: static;
       gap: 0;
     }
 
@@ -206,9 +225,16 @@ onMounted(() => {
         width: 100%;
       }
 
-      span {
+      span{
         color: #00000040;
         max-width: 10rem;
+      }
+
+      a {
+        color: #00000040;
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }
@@ -217,18 +243,9 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     gap: 8rem;
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
+    flex: 1;
+    min-width: 0;
     padding-top: 4rem;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    @media (max-width: 768px) {
-      overflow-y: visible;
-    }
 
     &__description {
       display: flex;
@@ -280,6 +297,7 @@ onMounted(() => {
 
         .live-icon {
           width: 1rem;
+          height: 1rem;
           border-radius: 100%;
         }
       }
@@ -294,6 +312,7 @@ onMounted(() => {
       img {
         max-width: 55vw;
         width: -webkit-fill-available;
+        border-radius: 2px;
 
         @media (max-width: 768px) {
           max-width: 100%;

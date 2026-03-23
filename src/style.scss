@@ -34,7 +34,6 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
@@ -51,13 +50,16 @@ body {
   //   auto;
 }
 
+/* Pas de scroll sur la home */
+html.home-no-scroll,
+body.home-no-scroll {
+  overflow: hidden;
+  height: 100%;
+}
+
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-  &:hover {
-    color: #535bf2;
-  }
+  color: #ffffff;
+  text-decoration: none;
 }
 
 h1 {
@@ -112,17 +114,4 @@ kbd {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }

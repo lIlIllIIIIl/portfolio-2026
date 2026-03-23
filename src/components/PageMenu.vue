@@ -2,6 +2,8 @@
 const route = useRoute()
 const activeAboutSection = inject('activeAboutSection')
 const aboutScrollDirection = inject('aboutScrollDirection')
+const homeProjectsVisible = inject('homeProjectsVisible')
+const homeHoveredProjectIndex = inject('homeHoveredProjectIndex')
 
 const menuItems = computed(() => {
   switch (route.name) {
@@ -15,6 +17,10 @@ const menuItems = computed(() => {
 })
 
 const isAbout = computed(() => route.name === 'about')
+
+const isHomeWithProjects = computed(
+  () => route.name === 'home' && homeProjectsVisible?.value
+)
 
 const activeIndex = computed(() => {
   if (!isAbout.value || !menuItems.value.length) {
@@ -34,13 +40,16 @@ const counterValue = computed(() => activeIndex.value + 1)
 const counterPrefix = '[ 0'
 const counterSuffix = '     ]'
 
+const homeProjectCounter = computed(() =>
+  String(homeHoveredProjectIndex?.value || 1).padStart(2, '0')
+)
+
 const menuTransitionName = computed(() =>
   aboutScrollDirection?.value === 'up' ? 'menu-slide-reverse' : 'menu-slide'
 )
 </script>
 
 <template>
-  <!-- Page About : label à gauche, compteur à droite, contenu au centre -->
   <div
     v-if="isAbout"
     class="about-menu about-menu--left"
@@ -73,12 +82,24 @@ const menuTransitionName = computed(() =>
       <span class="about-menu__counter-static">{{ counterSuffix }}</span>
     </div>
   </div>
-  <!-- Autres pages : menu classique à gauche -->
-  <div v-if="!isAbout" class="about-menu">
-    <div v-for="item in menuItems" :key="item" class="menu-item">
-      {{ item }}
+  <template v-else-if="isHomeWithProjects">
+    <div
+      class="about-menu about-menu--home about-menu--home-left"
+      aria-label="Section Work"
+    >
+      Work
     </div>
-  </div>
+    <div
+      class="about-menu about-menu--home about-menu--right"
+      :aria-label="`Projet ${homeProjectCounter} sur 6`"
+    >
+      <div class="about-menu__counter about-menu__counter--home">
+        <span class="about-menu__counter-static">[ </span>
+        <span class="about-menu__counter-digit">{{ homeProjectCounter }}</span>
+        <span class="about-menu__counter-static">   ]</span>
+      </div>
+    </div>
+  </template>
 </template>
 
 <style lang="scss" scoped>
@@ -106,6 +127,26 @@ const menuTransitionName = computed(() =>
     box-sizing: border-box;
   }
 
+  &--home {
+    top: auto;
+    bottom: 24px;
+    height: auto;
+    width: 12vw;
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-size: 0.85em;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.6);
+
+    &-left {
+      left: 0;
+      padding-left: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
   @media (max-width: 768px) {
     &--left,
     &--right {
@@ -127,6 +168,10 @@ const menuTransitionName = computed(() =>
   &__counter {
     font-family: "Geist Mono", ui-monospace, monospace;
     font-variant-numeric: tabular-nums;
+
+    &--home .about-menu__counter-digit {
+      min-width: 2ch;
+    }
     font-size: 0.85em;
     letter-spacing: 0.05em;
     color: rgba(255, 255, 255, 0.6);
@@ -181,11 +226,11 @@ const menuTransitionName = computed(() =>
   transition: transform 0.35s ease-out, opacity 0.25s ease-out;
 }
 .menu-slide-leave-to {
-  transform: translateY(-100%);
+  transform: translateY(-75%);
   opacity: 0;
 }
 .menu-slide-enter-from {
-  transform: translateY(100%);
+  transform: translateY(75%);
   opacity: 0;
 }
 .menu-slide-enter-to {
