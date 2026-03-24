@@ -125,11 +125,9 @@ onMounted(() => {
   right: 0;
   top: 0;
   padding: 0;
-
   display: flex;
   flex-direction: column;
   overflow: hidden;
-
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
 
@@ -167,7 +165,7 @@ onMounted(() => {
 
     &__close {
       font-family: "Geist Mono";
-      font-size: .75rem;
+      font-size: 0.75rem;
       font-weight: 500;
       padding: 0;
       margin: 0;
@@ -179,19 +177,19 @@ onMounted(() => {
     }
   }
 
-.work-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0 2rem 2rem;
-  gap: 2rem;
+  .work-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 2rem 2rem;
+    gap: 2rem;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    flex: 1;
-    min-height: 0;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+    }
   }
-}
 
   .work-left {
     position: sticky;
@@ -225,13 +223,14 @@ onMounted(() => {
         width: 100%;
       }
 
-      span{
+      span {
         color: #00000040;
         max-width: 10rem;
       }
 
       a {
         color: #00000040;
+
         &:hover {
           text-decoration: underline;
         }
@@ -271,7 +270,7 @@ onMounted(() => {
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: .4rem;
+        gap: 0.4rem;
 
         &::before {
           content: '';

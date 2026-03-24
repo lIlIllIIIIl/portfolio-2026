@@ -73,7 +73,7 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="view home"
+    class="home-container"
     :class="{ 'home--animating': isAnimating }"
     @click="triggerAnimation"
   >
@@ -161,23 +161,22 @@ onUnmounted(() => {
   </div>
 </template>
 
-<style scoped>
-.view.home {
+<style lang="scss" scoped>
+.home-container {
   position: fixed;
   inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  cursor: default;
   z-index: 1;
-}
 
-.home__center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  .home__center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .home__squares {
@@ -185,40 +184,39 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-}
 
-.home__square {
-  width: 105px;
-  height: 105px;
-  border-radius: 2px;
-  background: transparent;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
-  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
-}
+  .home__square {
+    width: 105px;
+    height: 105px;
+    border-radius: 2px;
+    background: transparent;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
 
-/* Courbes d'animation par position */
-.home__square--ease-out {
-  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* power4.out */
-}
+    &--ease-out {
+      transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
 
-.home__square--ease-none {
-  transition-timing-function: linear; /* none */
-}
+    &--ease-none {
+      transition-timing-function: linear;
+    }
 
-.home__square--ease-in {
-  transition-timing-function: cubic-bezier(0.895, 0.03, 0.685, 0.22); /* power4.in */
-}
+    &--ease-in {
+      transition-timing-function: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+    }
 
-.home__square--animate {
-  opacity: 0;
-}
+    &--animate {
+      opacity: 0;
+    }
+  }
 
-.home__squares--top .home__square--animate {
-  transform: translateY(150px);
-}
+  &--top .home__square--animate {
+    transform: translateY(150px);
+  }
 
-.home__squares--bottom .home__square--animate {
-  transform: translateY(-150px);
+  &--bottom .home__square--animate {
+    transform: translateY(-150px);
+  }
 }
 
 .home__spacer {
@@ -232,31 +230,30 @@ onUnmounted(() => {
   align-items: center;
   text-align: center;
   transition: opacity 0.5s ease-out;
+
+  &--hidden {
+    opacity: 0;
+  }
+
+  .home__name {
+    margin: 0;
+    font-family: "Geist", system-ui, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.95);
+    letter-spacing: 0.02em;
+  }
+
+  .home__title {
+    margin: 0.25rem 0 0;
+    font-family: "Geist", system-ui, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.02em;
+  }
 }
 
-.home__text--hidden {
-  opacity: 0;
-}
-
-.home__name {
-  margin: 0;
-  font-family: "Geist", system-ui, sans-serif;
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.95);
-  letter-spacing: 0.02em;
-}
-
-.home__title {
-  margin: 0.25rem 0 0;
-  font-family: "Geist", system-ui, sans-serif;
-  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.6);
-  letter-spacing: 0.02em;
-}
-
-/* Projets */
 .home__projects {
   position: absolute;
   inset: 0;
@@ -269,10 +266,8 @@ onUnmounted(() => {
   padding: 2rem;
   box-sizing: border-box;
   pointer-events: auto;
-}
 
-@media (max-width: 768px) {
-  .home__projects {
+  @media (max-width: 768px) {
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
@@ -294,78 +289,75 @@ onUnmounted(() => {
   font: inherit;
   color: inherit;
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
 
-.home__project:hover .home__project-cover {
-  opacity: 0.9;
-}
+  &:hover .home__project-cover {
+    opacity: 0.9;
+  }
 
-.home__project-cover {
-  width: min(217px, calc((100vw - 4rem - 7.5rem) / 6));
-  aspect-ratio: 1;
-  overflow: hidden;
-  border-radius: 2px;
-  transition: opacity 0.2s ease;
-}
+  &-cover {
+    width: min(217px, calc((100vw - 4rem - 7.5rem) / 6));
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 2px;
+    transition: opacity 0.2s ease;
 
-@media (max-width: 768px) {
-  .home__project-cover {
-    width: min(217px, calc(100vw - 4rem));
+    @media (max-width: 768px) {
+      width: min(217px, calc(100vw - 4rem));
+    }
+  }
+
+  &-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-align: left;
+    padding: 0.35rem 0.6rem;
+    background: #ffffff15;
+    border-radius: 2px;
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.9);
+
+    .home__project-icon {
+      width: 1rem;
+      height: 1rem;
+      border-radius: 100%;
+      flex-shrink: 0;
+    }
   }
 }
 
-.home__project-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.home__project-title {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  text-align: left;
-  padding: 0.35rem 0.6rem;
-  background: #ffffff15;
-  border-radius: 2px;
-  font-family: "Geist Mono", ui-monospace, monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.9);
-
-  .home__project-icon {
-    width: 1rem;
-    height: 1rem;
-    border-radius: 100%;
-    flex-shrink: 0;
-  }
-}
-
-/* Transition projets: opacité + translate depuis le bas */
 .projects-fade-enter-active {
   transition: opacity 0.5s ease-out;
+
+  .home__project {
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
 }
 
-.projects-fade-enter-active .home__project {
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-.projects-fade-enter-from,
-.projects-fade-enter-from .home__project {
+.projects-fade-enter-from {
   opacity: 0;
+
+  .home__project {
+    opacity: 0;
+    transform: translateY(40px);
+  }
 }
 
-.projects-fade-enter-from .home__project {
-  transform: translateY(40px);
-}
-
-.projects-fade-enter-to,
-.projects-fade-enter-to .home__project {
+.projects-fade-enter-to {
   opacity: 1;
-}
 
-.projects-fade-enter-to .home__project {
-  transform: translateY(0);
+  .home__project {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>

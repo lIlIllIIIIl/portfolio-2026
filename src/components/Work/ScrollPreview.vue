@@ -228,7 +228,8 @@ onUnmounted(() => {
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
-    margin-left: 9px; /* (VIEWPORT_WIDTH - IMAGE_MAX_WIDTH) / 2 pour centrer dans le carré */
+    // (VIEWPORT_WIDTH - IMAGE_MAX_WIDTH) / 2 pour centrer dans le carré
+    margin-left: 9px;
     pointer-events: none;
   }
 

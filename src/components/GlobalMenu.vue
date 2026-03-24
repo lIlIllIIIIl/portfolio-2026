@@ -130,7 +130,7 @@ const isAbout = computed(() => route.name === 'about')
       transition-delay: 0.06s;
     }
 
-    /* Ligne 2 : on garde grid-row: 1 (non animable) et on décale avec transform */
+    // Ligne 2 : on garde grid-row: 1 (non animable) et on décale avec transform
     &--row-2 {
       transform: translateY(calc(#{$row-height} + #{$row-gap})); /* 1 ligne + gap entre les lignes */
     }

@@ -5,6 +5,20 @@ const email = 'alexis.kessab@gmail.com'
 
 const textGit = ' [ github       ]'
 const textLink = ' [ linkedin    ]'
+
+async function copyEmail() {
+  try {
+    await navigator.clipboard.writeText(email)
+  } catch {
+    const input = document.createElement('input')
+    input.value = email
+    input.setAttribute('readonly', '')
+    document.body.appendChild(input)
+    input.select()
+    document.execCommand('copy')
+    document.body.removeChild(input)
+  }
+}
 </script>
 
 <template>
@@ -21,7 +35,14 @@ const textLink = ' [ linkedin    ]'
       <div class="contact__details-mail">
         <span>→ Reach out at</span>
 
-        <div class="opacity hover">
+        <div
+          class="opacity hover"
+          role="button"
+          tabindex="0"
+          @click="copyEmail"
+          @keydown.enter="copyEmail"
+          @keydown.space.prevent="copyEmail"
+        >
           <span> [ {{ email }}</span>
 
           <span class="bracket-close">
@@ -69,6 +90,10 @@ const textLink = ' [ linkedin    ]'
     display: flex;
     flex-direction: row;
     gap: 2rem;
+
+    .bracket-close {
+      margin-left: 2rem;
+    }
   }
 
   &-social {
@@ -78,24 +103,19 @@ const textLink = ' [ linkedin    ]'
     white-space: pre;
 
     .socials {
-        display: flex;
-        flex-direction: column;
+      display: flex;
+      flex-direction: column;
 
-        a {
-            text-decoration: none;
-        }
+      a {
+        text-decoration: none;
+      }
     }
   }
 }
 
-.bracket-close {
-    margin-left: 2rem;
-}
-
 .hover:hover {
-    cursor: pointer;
-    color: #ffffff;
-    transition: color 0.2s ease;
+  cursor: pointer;
+  color: #ffffff;
+  transition: color 0.2s ease;
 }
-
 </style>

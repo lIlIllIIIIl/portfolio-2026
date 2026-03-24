@@ -37,6 +37,11 @@ import experiences from '../../store/experiences.json'
   justify-content: space-between;
   align-items: flex-start;
   gap: 6rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0;
+  }
 }
 
 .experience-left {
@@ -63,6 +68,11 @@ import experiences from '../../store/experiences.json'
   font-family: "Geist";
   font-size: 0.88rem;
 
+  @media (max-width: 768px) {
+    text-align: left;
+    align-self: flex-start;
+  }
+
   &__bracket {
     margin-right: 1rem;
 
@@ -78,6 +88,10 @@ import experiences from '../../store/experiences.json'
   &__end {
     width: fit-content;
     padding-left: 1.2rem;
+
+    @media (max-width: 768px) {
+      padding-left: 0;
+    }
   }
 }
 </style>
