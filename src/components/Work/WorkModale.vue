@@ -131,6 +131,10 @@ onMounted(() => {
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
 
+  @media (max-width: 768px) {
+        width: 90vw;
+      }
+
   &--opening {
     transform: translateX(0);
   }
@@ -251,6 +255,11 @@ onMounted(() => {
       flex-direction: row;
       justify-content: space-between;
 
+      @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
       p {
         max-width: 20rem;
         color: black;
@@ -271,6 +280,10 @@ onMounted(() => {
         flex-direction: row;
         align-items: center;
         gap: 0.4rem;
+
+        @media (max-width: 768px) {
+       max-width: max-content;
+      }
 
         &::before {
           content: '';
