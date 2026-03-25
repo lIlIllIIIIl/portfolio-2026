@@ -192,7 +192,7 @@ const menuTransitionName = computed(() =>
     align-items: center;
   }
 
-  &__counter .about-menu__mask {
+  &__counter &__mask {
     width: 1ch;
     min-width: 1ch;
     display: inline-flex;
@@ -220,37 +220,43 @@ const menuTransitionName = computed(() =>
   }
 }
 
-/* Scroll vers le bas : sortie vers le haut, entrée depuis le bas */
+// Scroll vers le bas : sortie vers le haut, entrée depuis le bas
 .menu-slide-leave-active,
 .menu-slide-enter-active {
   transition: transform 0.35s ease-out, opacity 0.25s ease-out;
 }
+
 .menu-slide-leave-to {
   transform: translateY(-75%);
   opacity: 0;
 }
+
 .menu-slide-enter-from {
   transform: translateY(75%);
   opacity: 0;
 }
+
 .menu-slide-enter-to {
   transform: translateY(0);
   opacity: 1;
 }
 
-/* Scroll vers le haut : sortie vers le bas, entrée depuis le haut */
+// Scroll vers le haut : sortie vers le bas, entrée depuis le haut
 .menu-slide-reverse-leave-active,
 .menu-slide-reverse-enter-active {
   transition: transform 0.35s ease-out, opacity 0.25s ease-out;
 }
+
 .menu-slide-reverse-leave-to {
   transform: translateY(100%);
   opacity: 0;
 }
+
 .menu-slide-reverse-enter-from {
   transform: translateY(-100%);
   opacity: 0;
 }
+
 .menu-slide-reverse-enter-to {
   transform: translateY(0);
   opacity: 1;

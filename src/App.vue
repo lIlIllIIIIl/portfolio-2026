@@ -1,4 +1,4 @@
-<!-- À faire : lien github -->
+<!-- À faire : lien github projets? -->
 
 <script setup>
 import GlobalMenu from './components/GlobalMenu.vue'
@@ -35,35 +35,27 @@ provide('homeHoveredProjectIndex', homeHoveredProjectIndex)
   </div>
 </template>
 
-<style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
-
-<style scoped>
+<style lang="scss" scoped>
 #app {
   position: relative;
   min-height: 100vh;
   z-index: 0;
 }
+
 .app-nav {
   display: flex;
   gap: 1.5rem;
   background: #1a1a1a;
   border-bottom: 1px solid #333;
-}
-.app-nav a {
-  color: #eee;
-  text-decoration: none;
-}
-.app-nav a:hover,
-.app-nav a.router-link-active {
-  color: #42b883;
+
+  a {
+    color: #eee;
+    text-decoration: none;
+
+    &:hover,
+    &.router-link-active {
+      color: #42b883;
+    }
+  }
 }
 </style>

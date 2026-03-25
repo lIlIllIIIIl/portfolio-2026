@@ -84,6 +84,7 @@ onUnmounted(() => {
   padding-left: 12vw;
   padding-right: 12vw;
   box-sizing: border-box;
+
   &::-webkit-scrollbar {
     display: none;
   }

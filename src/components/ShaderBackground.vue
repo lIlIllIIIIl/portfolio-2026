@@ -108,17 +108,17 @@ onUnmounted(() => {
   <div ref="containerRef" class="shader-background" aria-hidden="true" />
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .shader-background {
   position: fixed;
   inset: 0;
   z-index: -1;
   overflow: hidden;
-}
 
-.shader-background canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>

@@ -32,6 +32,7 @@ const offset = { x: 12, y: 12 }
   white-space: nowrap;
 }
 
+// Transition copy-feedback
 .copy-feedback-enter-active,
 .copy-feedback-leave-active {
   transition: opacity 0.25s ease;

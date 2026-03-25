@@ -47,63 +47,105 @@ function colEnter(col) {
 </template>
 
 <style lang="scss" scoped>
-  .page-title,
-  .interest-num {
-    height: 105px;
-    display: flex;
-    align-items: center;
-  }
+.page-title,
+.interest-num {
+  height: 105px;
+  display: flex;
+  align-items: center;
+}
 
-  .grid-container {
-    display: grid;
-    grid-template-columns: repeat(8, minmax(0, 1fr));
-    grid-template-rows: 1fr auto 1fr;
-    gap: 8px;
-    width: 70vw;
-    padding-left: 24px;
-    padding-right: 24px;
-    height: -webkit-fill-available;
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  grid-template-rows: 1fr auto 1fr;
+  gap: 8px;
+  width: 70vw;
+  padding-left: 24px;
+  padding-right: 24px;
+  height: -webkit-fill-available;
+  min-height: 0;
+  overflow: auto;
+
+  .col {
+    height: 100%;
     min-height: 0;
-    overflow: auto;
-
-    .col {
-      height: 100%;
-      min-height: 0;
-    }
   }
 
-  .interest-container {
+  @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: safe center;
+    gap: 1.5rem;
     width: 100%;
-    min-width: 0;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    height: auto;
+    min-height: 0;
+    max-height: calc(100dvh - 10rem);
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
 
-    .img-container {
-      width: 100%;
-      aspect-ratio: 1;
-      flex-shrink: 0;
-      outline: #ffffff40 1px solid;
-      overflow: hidden;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: opacity 0.15s ease;
-      }
-    }
-
-    span {
-      display: block;
-      width: 100%;
-      min-height: 1.5em;
-      margin-top: 6px;
-      opacity: 0;
-      transition: opacity 0.15s ease;
-
-      &.is-visible {
-        opacity: 1;
-      }
+    .col {
+      display: none;
     }
   }
+}
+
+.interest-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+
+  @media (max-width: 768px) {
+    width: auto;
+    max-width: 100%;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .img-container {
+    width: 100%;
+    aspect-ratio: 1;
+    flex-shrink: 0;
+    outline: #ffffff40 1px solid;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+      width: 160px;
+      height: 160px;
+      aspect-ratio: unset;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.15s ease;
+    }
+  }
+
+  span {
+    display: block;
+    width: 100%;
+    min-height: 1.5em;
+    margin-top: 6px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+
+    &.is-visible {
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      opacity: 1;
+      width: 100%;
+      max-width: 160px;
+      text-align: left;
+    }
+  }
+}
 </style>
