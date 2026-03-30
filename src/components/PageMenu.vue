@@ -113,7 +113,7 @@ const menuTransitionName = computed(() =>
     left: 0;
     display: flex;
     align-items: center;
-    padding-left: 1rem;
+    padding-left: 2rem;
     box-sizing: border-box;
   }
 
@@ -123,7 +123,7 @@ const menuTransitionName = computed(() =>
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding-right: 1rem;
+    padding-right: 2rem;
     box-sizing: border-box;
   }
 
@@ -139,7 +139,7 @@ const menuTransitionName = computed(() =>
 
     &-left {
       left: 0;
-      padding-left: 1rem;
+      padding-left: 2rem;
     }
 
     @media (max-width: 768px) {
@@ -214,7 +214,6 @@ const menuTransitionName = computed(() =>
 
     &--current {
       height: auto;
-      width: 100%;
       justify-content: center;
     }
   }

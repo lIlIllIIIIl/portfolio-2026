@@ -8,12 +8,66 @@ const showProjects = ref(false)
 const selectedWork = ref(null)
 const homeProjectsVisible = inject('homeProjectsVisible')
 const homeHoveredProjectIndex = inject('homeHoveredProjectIndex')
+const homeIntroDone = inject('homeIntroDone')
+const completeHomeIntro = inject('completeHomeIntro')
+
 const SQUARES_TOP = 3
 const SQUARES_BOTTOM = 3
 
 const projects = Object.values(works).slice(0, 6)
 
 const ANIMATION_DURATION = 650
+const PROJECTS_FADE_MS = 550
+const MIN_LOADER_MS = 2000
+
+let isUnmounted = false
+
+function preloadImage(src) {
+  return new Promise((resolve) => {
+    const img = new Image()
+    img.onload = () => resolve()
+    img.onerror = () => resolve()
+    img.src = src
+  })
+}
+
+async function preloadHomeMedia() {
+  const urls = projects.flatMap((project) => [
+    `/images/works/${project.image}/cover.png`,
+    `/images/works/${project.image}/button.png`,
+  ])
+  await Promise.all(urls.map(preloadImage))
+}
+
+async function runLoaderSequence() {
+  const start = Date.now()
+  await preloadHomeMedia()
+  if (isUnmounted) {
+    return
+  }
+  const elapsed = Date.now() - start
+  const remaining = Math.max(0, MIN_LOADER_MS - elapsed)
+  await new Promise((resolve) => setTimeout(resolve, remaining))
+}
+
+function triggerIntroAnimation() {
+  if (isUnmounted || isAnimating.value) {
+    return
+  }
+  isAnimating.value = true
+  setTimeout(() => {
+    if (isUnmounted) {
+      return
+    }
+    showProjects.value = true
+    setTimeout(() => {
+      if (isUnmounted) {
+        return
+      }
+      completeHomeIntro?.()
+    }, PROJECTS_FADE_MS)
+  }, ANIMATION_DURATION)
+}
 
 watch(showProjects, (visible) => {
   if (homeProjectsVisible) {
@@ -23,16 +77,6 @@ watch(showProjects, (visible) => {
     homeHoveredProjectIndex.value = 0
   }
 }, { immediate: true })
-
-function triggerAnimation() {
-  if (isAnimating.value) {
-    return
-  }
-  isAnimating.value = true
-  setTimeout(() => {
-    showProjects.value = true
-  }, ANIMATION_DURATION)
-}
 
 function onProjectHover(index) {
   if (homeHoveredProjectIndex) {
@@ -54,12 +98,24 @@ function closeWork() {
   selectedWork.value = null
 }
 
-onMounted(() => {
+onMounted(async () => {
   document.documentElement.classList.add('home-no-scroll')
   document.body.classList.add('home-no-scroll')
+
+  if (homeIntroDone?.value) {
+    showProjects.value = true
+    return
+  }
+
+  await runLoaderSequence()
+  if (isUnmounted) {
+    return
+  }
+  triggerIntroAnimation()
 })
 
 onUnmounted(() => {
+  isUnmounted = true
   document.documentElement.classList.remove('home-no-scroll')
   document.body.classList.remove('home-no-scroll')
   if (homeProjectsVisible) {
@@ -75,7 +131,6 @@ onUnmounted(() => {
   <div
     class="home-container"
     :class="{ 'home--animating': isAnimating }"
-    @click="triggerAnimation"
   >
     <div v-if="!showProjects" class="home__center">
       <div class="home__squares home__squares--top">
