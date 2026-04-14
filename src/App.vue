@@ -5,6 +5,7 @@ import GlobalMenu from './components/GlobalMenu.vue'
 import PageMenu from './components/PageMenu.vue'
 import ShaderBackground from './components/ShaderBackground.vue'
 import CopyFeedback from './components/CopyFeedback.vue'
+import CustomCursor from './components/CustomCursor.vue'
 
 const HOME_INTRO_STORAGE_KEY = 'portfolio-home-intro-done'
 const VISITED_NON_HOME_KEY = 'portfolio-visited-non-home'
@@ -82,6 +83,8 @@ provide('completeHomeIntro', completeHomeIntro)
     </router-view>
 
     <CopyFeedback />
+
+    <CustomCursor />
   </div>
 </template>
 

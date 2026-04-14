@@ -53,7 +53,7 @@ onUnmounted(() => {
   <div ref="containerRef" class="about-scroll-container">
     <section id="intro" class="about-section">
       <div>
-        <p>I'm Alexis Kessab, a fullstack developer, currently looking for a job <span class="emoji">💻</span> after traveling around the world for 1 year. <span class="emoji">🎒</span></p>
+        <p>I'm Alexis Kessab, a front-end developer, currently looking for a job <span class="emoji">💻</span> after traveling around the world for 1 year. <span class="emoji">🎒</span></p>
         <p class="opacity">Available starting february 2026</p>
       </div>
     </section>

@@ -28,7 +28,7 @@ function updatePosition(event) {
 export function useCopyFeedback() {
   function showFeedback(event) {
     clearListeners()
-    text.value = 'copié !'
+    text.value = 'copied!'
     updatePosition(event)
     visible.value = true
 

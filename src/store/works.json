@@ -4,7 +4,7 @@
     "image": "memoria",
     "date": "2026",
     "tech": "Fullstack developer",
-    "description": "Memoria is a project that allows you to create a full movie enhanced with AI from your pictures.",
+    "description": "Memoria is a project that a friend and I are currently developing. It allows you to create a movie enhanced with AI from your pictures. I am working with Vue.js & Node.js, focusing on the interface and the connection with the APIs we are using to generate the movie.",
     "live": "",
     "github": "",
     "len": 4
@@ -14,9 +14,9 @@
     "image": "artchive",
     "date": "2024-25",
     "tech": "Frontend developer",
-    "description": "Artchive is a personal project I created to display some of the drawings & illustrations I love from the artists I love.",
+    "description": "I created Artchive as a personal project to display some of the drawings & illustrations made by artists I love. The main challenge of this project was creating a dynamic grid that adapts to the displayed images.",
     "live": "https://artchive-three.vercel.app/",
-    "github": "",
+    "github": "https://github.com/lIlIllIIIIl/artchive",
     "len": 5
   },
   "cfdoc": {
@@ -24,7 +24,7 @@
     "image": "cfdoc",
     "date": "2024",
     "tech": "Fullstack developer w/ Yann Quillard",
-    "description": "cf.doc is my last school project. It's an AI tool that helps team to understand the technical knowledge.",
+    "description": "cf.doc is my final school project. It's an AI tool that helps teams to understand the technical knowledge. I worked with Next.js on the landing page & created a tool that comapares the old & new documentation enhanced with AI.",
     "live": "",
     "github": "",
     "len": 5
@@ -34,7 +34,7 @@
     "image": "pimpim",
     "date": "2021",
     "tech": "Unity developer (C#)",
-    "description": "PimPim’s adventure is a video game where you play as PimPim, a penguin who has to go through all four seasons to finally reach winter and his home.",
+    "description": "In Pimpim's adventure, you play as PimPim, a penguin who must go through all four seasons to finally reach winter and his home. It was fully developed in C# during a one-week school project. This was our first time using Unity and coding in C#.",
     "live": "",
     "github": "",
     "len": 8
@@ -45,7 +45,7 @@
     "image": "aurore",
     "date": "2021",
     "tech": "Fullstack developer (low-code)",
-    "description": "Aurore is a low-code school project. It is a platform that allows you to rent house and apartments designed by architects and interior designers.",
+    "description": "Aurore is a low-code school project. It is a platform that allows you to rent house and apartments designed by architects and interior designers. The website was created with Bubble.",
     "live": "",
     "github": "",
     "len": 4
@@ -55,7 +55,7 @@
     "image": "uso",
     "date": "2021",
     "tech": "Fullstack developer w/ Jaël Beining",
-    "description": "USO is a tool that allows you to synchronize your Osu & spotify accounts to enhance your playlists.",
+    "description": "USO is a tool that allows you to synchronize your Osu & Spotify accounts to enhance your playlists. I originally worked mainly as a front-end developer, but I also helped with the front-end towards the end. Initially, the project was made using React & Symfony but I finished the project years later using Vue.js for the front-end & Node.js for the back-end.",
     "live": "https://uso-psi.vercel.app/",
     "github": "https://github.com/lIlIllIIIIl/USO",
     "len": 5
