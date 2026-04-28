@@ -89,7 +89,7 @@ onMounted(() => {
                     :href="work.github"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="work-right__description__cta"
+                    class="work-right__description__cta git"
                   >
                     <svg class="cta-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                       <path
@@ -151,7 +151,7 @@ onMounted(() => {
   transition: transform 0.3s ease-in-out;
 
   @media (max-width: 768px) {
-        width: 90vw;
+        width: 100vw;
       }
 
   &--opening {
@@ -226,7 +226,7 @@ onMounted(() => {
   .work-left {
     display: flex;
     flex-direction: column;
-    gap: 10rem;
+    gap: 10vh;
     padding-top: 2rem;
 
     @media (max-width: 768px) {
@@ -273,11 +273,14 @@ onMounted(() => {
     flex: 1;
     min-width: 0;
 
+    @media (max-width: 768px) {
+        gap: 2rem;
+      }
+
     &__description {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       justify-content: space-between;
-      gap: 1rem;
 
       @media (max-width: 768px) {
         flex-direction: column;
@@ -305,7 +308,7 @@ onMounted(() => {
         align-items: center;
         gap: 0.4rem;
         width: fit-content;
-        font-size: 0.75rem;
+        font-size: .8rem;
 
         @media (max-width: 768px) {
        max-width: max-content;
@@ -341,8 +344,8 @@ onMounted(() => {
         }
 
         .cta-icon {
-          width: 1rem;
-          height: 1rem;
+          width: 1.2rem;
+          height: 1.2rem;
           flex-shrink: 0;
         }
       }

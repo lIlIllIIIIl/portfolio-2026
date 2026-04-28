@@ -54,7 +54,7 @@ onUnmounted(() => {
     <section id="intro" class="about-section">
       <div>
         <p>I'm Alexis Kessab, a front-end developer, currently looking for a job <span class="emoji">💻</span> after traveling around the world for 1 year. <span class="emoji">🎒</span></p>
-        <p class="opacity">Available starting february 2026</p>
+        <p class="opacity">Available starting april 2026</p>
       </div>
     </section>
 
