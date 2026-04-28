@@ -15,6 +15,7 @@ declare module 'vue' {
     AboutExperiences: typeof import('./src/components/About/AboutExperiences.vue')['default']
     AboutInterests: typeof import('./src/components/About/AboutInterests.vue')['default']
     CopyFeedback: typeof import('./src/components/CopyFeedback.vue')['default']
+    CustomCursor: typeof import('./src/components/CustomCursor.vue')['default']
     GlobalMenu: typeof import('./src/components/GlobalMenu.vue')['default']
     IconExternalLink: typeof import('./src/components/icons/IconExternalLink.vue')['default']
     PageMenu: typeof import('./src/components/PageMenu.vue')['default']

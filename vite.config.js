@@ -6,6 +6,8 @@ import glsl from 'vite-plugin-glsl'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Si le site est servi depuis un sous-dossier (ex. domaine.com/portfolio/),
+  // définir la même valeur ici : base: '/portfolio/'
   plugins: [
     vue(),
     AutoImport({

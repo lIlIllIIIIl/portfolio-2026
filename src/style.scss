@@ -40,8 +40,25 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  scrollbar-width: none;
+}
+
 body {
   margin: 0;
+}
+
+/* Curseur custom (voir CustomCursor.vue) — uniquement avec pointeur fin */
+html.custom-cursor-active,
+html.custom-cursor-active * {
+  cursor: none !important;
+}
+
+html.custom-cursor-active input,
+html.custom-cursor-active textarea,
+html.custom-cursor-active select,
+html.custom-cursor-active [contenteditable='true'] {
+  cursor: text !important;
 }
 
 /* Pas de scroll sur la home */

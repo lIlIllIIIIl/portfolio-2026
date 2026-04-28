@@ -44,47 +44,66 @@ onMounted(() => {
         'work-container--closing': isClosing,
       }"
     >
-      <div ref="workScrollRef" class="work-scroll">
-        <div class="work-header">
-          <h1 class="work-header__title">{{ work.title }}</h1>
-          <span class="work-header__close" @click="onCloseClick">{{ closeLabel }}</span>
-        </div>
+      <div class="work-header">
+        <h1 class="work-header__title">{{ work.title }}</h1>
+        <span class="work-header__close" @click="onCloseClick">{{ closeLabel }}</span>
+      </div>
 
-        <div class="work-content">
-          <div class="work-left">
-            <div class="work-left__description">
-              <span>{{ work.date }}</span>
-              <span>[{{ work.tech }}]</span>
-              <!-- <a class="opacity hover" v-if="work.github" :href="work.github" target="_blank">the repo</a> -->
-            </div>
-
-            <div class="work-left__preview">
-              <ScrollPreview
-                :scroll-container-ref="workScrollRef"
-                :image-folder="work.image"
-                :image-count="work.len"
-              />
-            </div>
+      <div class="work-body">
+        <div class="work-left">
+          <div class="work-left__description">
+            <span>{{ work.date }}</span>
+            <span>[{{ work.tech }}]</span>
+            <!-- <a class="opacity hover" v-if="work.github" :href="work.github" target="_blank">the repo</a> -->
           </div>
 
-          <div class="work-right">
-            <div class="work-right__description">
-              <p>{{ work.description }}</p>
+          <div class="work-left__preview">
+            <ScrollPreview
+              :scroll-container-ref="workScrollRef"
+              :image-folder="work.image"
+              :image-count="work.len"
+            />
+          </div>
+        </div>
 
-              <a
-                v-if="work.live"
-                :href="work.live"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="work-right__description__live"
-              >
-                <img class="live-icon" :src="`/images/works/${work.image}/button.png`" :alt="work.title" />
-                <span>SEE LIVE</span>
-              </a>
-            </div>
+        <div ref="workScrollRef" class="work-right-scroll">
+          <div class="work-content">
+            <div class="work-right">
+              <div class="work-right__description">
+                <p>{{ work.description }}</p>
 
-            <div class="work-right__content">
-              <img v-for="i in work.len" v-bind:key="i" :src="`/images/works/${work.image}/${i}.png`" />
+                <div class="work-right_live_container">
+                  <a
+                    v-if="work.live"
+                    :href="work.live"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="work-right__description__cta"
+                  >
+                    <img class="live-icon" :src="`/images/works/${work.image}/button.png`" :alt="work.title" />
+                    <span>SEE LIVE</span>
+                  </a>
+
+                  <a
+                    v-if="work.github"
+                    :href="work.github"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="work-right__description__cta git"
+                  >
+                    <svg class="cta-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path
+                        fill="currentColor"
+                        d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.5-1.3-1.2-1.7-1.2-1.7-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.7 1.2 3.3.9.1-.7.4-1.2.7-1.5-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0C17.7 4.6 18.7 5 18.7 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.3v3.4c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              <div class="work-right__content">
+                <img v-for="i in work.len" v-bind:key="i" :src="`/images/works/${work.image}/${i}.png`" />
+              </div>
             </div>
           </div>
         </div>
@@ -117,7 +136,7 @@ onMounted(() => {
 
 .work-container {
   position: fixed;
-  z-index: 10000;
+  z-index: 900;
   background-color: #fff;
   color: black;
   width: 70vw;
@@ -132,7 +151,7 @@ onMounted(() => {
   transition: transform 0.3s ease-in-out;
 
   @media (max-width: 768px) {
-        width: 90vw;
+        width: 100vw;
       }
 
   &--opening {
@@ -143,16 +162,31 @@ onMounted(() => {
     transform: translateX(100%);
   }
 
-  .work-scroll {
+  .work-body {
     flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 0 2rem 2rem;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 2rem;
+      padding: 0 2rem 2rem;
+    }
+  }
+
+  .work-right-scroll {
+    flex: 1;
+    min-width: 0;
     min-height: 0;
     overflow-y: auto;
     scroll-behavior: smooth;
   }
 
   .work-header {
-    position: sticky;
-    top: 0;
     z-index: 2;
     display: flex;
     flex-direction: row;
@@ -178,34 +212,24 @@ onMounted(() => {
       cursor: pointer;
       color: inherit;
       white-space: pre;
+
+      &:hover {
+        opacity: .7;
+      }
     }
   }
 
   .work-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0 2rem 2rem;
-    gap: 2rem;
-
-    @media (max-width: 768px) {
-      flex-direction: column;
-      flex: 1;
-      min-height: 0;
-    }
+    padding-top: 2rem;
   }
 
   .work-left {
-    position: sticky;
-    top: 5rem;
-    align-self: flex-start;
     display: flex;
     flex-direction: column;
-    gap: 10rem;
-    padding-top: 4rem;
+    gap: 10vh;
+    padding-top: 2rem;
 
     @media (max-width: 768px) {
-      position: static;
       gap: 0;
     }
 
@@ -248,7 +272,10 @@ onMounted(() => {
     gap: 8rem;
     flex: 1;
     min-width: 0;
-    padding-top: 4rem;
+
+    @media (max-width: 768px) {
+        gap: 2rem;
+      }
 
     &__description {
       display: flex;
@@ -261,17 +288,17 @@ onMounted(() => {
       }
 
       p {
-        max-width: 20rem;
+        max-width: 25rem;
         color: black;
       }
 
-      &__live {
+      &__cta {
         position: relative;
         overflow: hidden;
         height: fit-content;
         padding: 8px;
-        border-radius: 0;
-        background: #00000005;
+        border-radius: 2px;
+        background: rgba(0, 0, 0, 0.05);
         color: #000;
         cursor: pointer;
         border: none;
@@ -280,6 +307,8 @@ onMounted(() => {
         flex-direction: row;
         align-items: center;
         gap: 0.4rem;
+        width: fit-content;
+        font-size: .8rem;
 
         @media (max-width: 768px) {
        max-width: max-content;
@@ -302,6 +331,7 @@ onMounted(() => {
         }
 
         img,
+        svg,
         span {
           position: relative;
           z-index: 1;
@@ -311,6 +341,12 @@ onMounted(() => {
           width: 1rem;
           height: 1rem;
           border-radius: 100%;
+        }
+
+        .cta-icon {
+          width: 1.2rem;
+          height: 1.2rem;
+          flex-shrink: 0;
         }
       }
     }
@@ -332,5 +368,11 @@ onMounted(() => {
       }
     }
   }
+}
+
+.work-right_live_container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.2rem;
 }
 </style>

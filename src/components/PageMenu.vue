@@ -3,7 +3,7 @@ const route = useRoute()
 const activeAboutSection = inject('activeAboutSection')
 const aboutScrollDirection = inject('aboutScrollDirection')
 const homeProjectsVisible = inject('homeProjectsVisible')
-const homeHoveredProjectIndex = inject('homeHoveredProjectIndex')
+const HOME_FEATURED_PROJECTS_COUNT = 6
 
 const menuItems = computed(() => {
   switch (route.name) {
@@ -37,11 +37,11 @@ const activeItem = computed(() => {
 })
 
 const counterValue = computed(() => activeIndex.value + 1)
-const counterPrefix = '[ 0'
-const counterSuffix = '     ]'
+const counterPrefix = '[  0'
+const counterSuffix = '          ]'
 
 const homeProjectCounter = computed(() =>
-  String(homeHoveredProjectIndex?.value || 1).padStart(2, '0')
+  String(HOME_FEATURED_PROJECTS_COUNT)
 )
 
 const menuTransitionName = computed(() =>
@@ -91,12 +91,12 @@ const menuTransitionName = computed(() =>
     </div>
     <div
       class="about-menu about-menu--home about-menu--right"
-      :aria-label="`Projet ${homeProjectCounter} sur 6`"
+      :aria-label="`${homeProjectCounter} projets mis en avant`"
     >
       <div class="about-menu__counter about-menu__counter--home">
-        <span class="about-menu__counter-static">[ </span>
-        <span class="about-menu__counter-digit">{{ homeProjectCounter }}</span>
-        <span class="about-menu__counter-static">   ]</span>
+        <span class="about-menu__counter-static">{{ counterPrefix }}</span>
+        <span class="about-menu__counter-digit">{{ homeProjectCounter }} </span>
+        <span class="about-menu__counter-static">{{ counterSuffix }}</span>
       </div>
     </div>
   </template>
@@ -107,13 +107,14 @@ const menuTransitionName = computed(() =>
   height: 100vh;
   position: fixed;
   top: 0;
+  z-index: 3;
 
   &--left {
     width: 12vw;
     left: 0;
     display: flex;
     align-items: center;
-    padding-left: 1rem;
+    padding-left: 2rem;
     box-sizing: border-box;
   }
 
@@ -123,7 +124,7 @@ const menuTransitionName = computed(() =>
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding-right: 1rem;
+    padding-right: 2rem;
     box-sizing: border-box;
   }
 
@@ -132,14 +133,13 @@ const menuTransitionName = computed(() =>
     bottom: 24px;
     height: auto;
     width: 12vw;
-    font-family: "Geist Mono", ui-monospace, monospace;
+    font-family: "Geist", ui-monospace, monospace;
     font-size: 0.85em;
-    letter-spacing: 0.05em;
-    color: rgba(255, 255, 255, 0.6);
+    color: #ffffff;
 
     &-left {
       left: 0;
-      padding-left: 1rem;
+      padding-left: 2rem;
     }
 
     @media (max-width: 768px) {
@@ -173,7 +173,6 @@ const menuTransitionName = computed(() =>
       min-width: 2ch;
     }
     font-size: 0.85em;
-    letter-spacing: 0.05em;
     color: rgba(255, 255, 255, 0.6);
     width: 100%;
     display: flex;
@@ -199,13 +198,6 @@ const menuTransitionName = computed(() =>
     justify-content: center;
   }
 
-  &__counter-digit {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 1ch;
-  }
-
   .menu-item {
     height: 100vh;
     display: flex;
@@ -214,7 +206,6 @@ const menuTransitionName = computed(() =>
 
     &--current {
       height: auto;
-      width: 100%;
       justify-content: center;
     }
   }
@@ -227,12 +218,12 @@ const menuTransitionName = computed(() =>
 }
 
 .menu-slide-leave-to {
-  transform: translateY(-75%);
+  transform: translateY(-40%);
   opacity: 0;
 }
 
 .menu-slide-enter-from {
-  transform: translateY(75%);
+  transform: translateY(40%);
   opacity: 0;
 }
 

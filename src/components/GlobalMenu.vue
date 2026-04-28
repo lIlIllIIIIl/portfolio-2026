@@ -74,11 +74,10 @@ const isAbout = computed(() => route.name === 'about')
     flex-direction: column;
     gap: 8px;
     line-height: 105%;
-    max-width: 200px;
+    max-width: 140px;
     font-family: "Geist", system-ui, sans-serif;
     font-weight: 400;
     font-size: 0.75rem;
-    letter-spacing: 0.05em;
     color: rgba(255, 255, 255, 0.87);
     text-decoration: none;
     transition: opacity 0.2s ease;
@@ -127,7 +126,7 @@ const isAbout = computed(() => route.name === 'about')
     &--close {
       grid-column: 4;
       text-align: right;
-      transition-delay: 0.06s;
+      transition-delay: 0.12s;
     }
 
     // Ligne 2 : on garde grid-row: 1 (non animable) et on décale avec transform
@@ -141,7 +140,6 @@ const isAbout = computed(() => route.name === 'about')
     align-self: center;
     font-family: inherit;
     font-size: inherit;
-    letter-spacing: 0.05em;
     color: inherit;
     text-decoration: none;
     text-align: left;

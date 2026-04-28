@@ -1,12 +1,15 @@
 <script setup>
 import IconExternalLink from '../icons/IconExternalLink.vue'
+import { useCopyFeedback } from '../../composables/useCopyFeedback'
 
 const email = 'alexis.kessab@gmail.com'
 
 const textGit = ' [ github       ]'
 const textLink = ' [ linkedin    ]'
 
-async function copyEmail() {
+const { showFeedback } = useCopyFeedback()
+
+async function copyEmail(event) {
   try {
     await navigator.clipboard.writeText(email)
   } catch {
@@ -18,6 +21,7 @@ async function copyEmail() {
     document.execCommand('copy')
     document.body.removeChild(input)
   }
+  showFeedback(event)
 }
 </script>
 
@@ -93,6 +97,10 @@ async function copyEmail() {
 
     .bracket-close {
       margin-left: 2rem;
+    }
+
+    > div {
+      translate: -7px 0;
     }
   }
 
