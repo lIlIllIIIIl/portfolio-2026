@@ -151,8 +151,11 @@ onMounted(() => {
   transition: transform 0.3s ease-in-out;
 
   @media (max-width: 768px) {
-        width: 100vw;
-      }
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 
   &--opening {
     transform: translateX(0);
@@ -173,6 +176,8 @@ onMounted(() => {
 
     @media (max-width: 768px) {
       flex-direction: column;
+      flex: none;
+      min-height: auto;
       gap: 2rem;
       padding: 0 2rem 2rem;
     }
@@ -184,6 +189,12 @@ onMounted(() => {
     min-height: 0;
     overflow-y: auto;
     scroll-behavior: smooth;
+
+    @media (max-width: 768px) {
+      flex: none;
+      min-height: auto;
+      overflow: visible;
+    }
   }
 
   .work-header {
@@ -274,8 +285,9 @@ onMounted(() => {
     min-width: 0;
 
     @media (max-width: 768px) {
-        gap: 2rem;
-      }
+      gap: 2rem;
+      flex: none;
+    }
 
     &__description {
       display: flex;
