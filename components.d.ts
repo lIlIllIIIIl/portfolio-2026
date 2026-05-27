@@ -23,6 +23,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     ScrollPreview: typeof import('./src/components/Work/ScrollPreview.vue')['default']
     ShaderBackground: typeof import('./src/components/ShaderBackground.vue')['default']
+    TechStackChip: typeof import('./src/components/Work/TechStackChip.vue')['default']
     WorkModale: typeof import('./src/components/Work/WorkModale.vue')['default']
   }
 }

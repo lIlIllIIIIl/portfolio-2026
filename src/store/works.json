@@ -4,60 +4,65 @@
     "image": "memoria",
     "date": "2026",
     "tech": "Fullstack developer",
-    "description": "Memoria is a project that a friend and I are currently developing. It allows you to create a movie enhanced with AI from your pictures. I am working with Vue.js & Node.js, focusing on the interface and the connection with the APIs we are using to generate the movie.",
+    "description": "Memoria is a collaboration in progress: users turn their photos into AI-assisted short films. I own the frontend and the integration layer with the services that drive generation, from layout and interactions to wiring the APIs end to end.",
     "live": "",
     "github": "",
-    "len": 4
+    "len": 4,
+    "stack": ["Vue.js", "Node.js"]
   },
   "artchive": {
     "title": "Artchive",
     "image": "artchive",
     "date": "2024-25",
     "tech": "Frontend developer",
-    "description": "I created Artchive as a personal project to display some of the drawings & illustrations made by artists I love. The main challenge of this project was creating a dynamic grid that adapts to the displayed images.",
+    "description": "A personal gallery for art I care about—illustrations and drawings from artists I follow. The focus was a responsive, masonry-style layout that reflows cleanly with different aspect ratios so every piece reads well on the page.",
     "live": "https://artchive-three.vercel.app/",
     "github": "https://github.com/lIlIllIIIIl/artchive",
-    "len": 5
+    "len": 5,
+    "stack": ["Vue.js", "Node.js"]
   },
   "cfdoc": {
     "title": "cf.doc",
     "image": "cfdoc",
     "date": "2024",
     "tech": "Fullstack developer w/ Yann Quillard",
-    "description": "cf.doc is my final school project. It's an AI tool that helps teams to understand the technical knowledge. I worked with Next.js on the landing page & created a tool that comapares the old & new documentation enhanced with AI.",
+    "description": "Final-year capstone: an AI-assisted product for teams navigating internal technical documentation. I shipped the marketing site in Next.js and built the core experience—a side-by-side workspace that compares legacy docs with an AI-enriched version so differences and updates are easy to spot.",
     "live": "",
     "github": "",
-    "len": 5
+    "len": 5,
+    "stack": ["Next.js", "Python", "Vue.js"]
   },
   "pimpim": {
     "title": "Pimpim's adventure",
     "image": "pimpim",
     "date": "2021",
-    "tech": "Unity developer (C#)",
-    "description": "In Pimpim's adventure, you play as PimPim, a penguin who must go through all four seasons to finally reach winter and his home. It was fully developed in C# during a one-week school project. This was our first time using Unity and coding in C#.",
+    "tech": "Unity developer",
+    "description": "A compact platformer starring PimPim, a penguin crossing spring, summer, autumn, and winter to get back home. Built in a one-week school sprint in Unity and C#, it was my first hands-on with the engine and scripting—game feel, level flow, and collisions from scratch.",
     "live": "",
     "github": "",
-    "len": 8
+    "len": 8,
+    "stack": ["Unity", "C#"]
   },
-
   "aurore": {
     "title": "Aurore",
     "image": "aurore",
     "date": "2021",
     "tech": "Fullstack developer (low-code)",
-    "description": "Aurore is a low-code school project. It is a platform that allows you to rent house and apartments designed by architects and interior designers. The website was created with Bubble.",
+    "description": "A school brief on low-code delivery: a marketplace-style concept for renting houses and apartments curated from architects and interior designers. The entire product surface—listings, flows, and visuals—was modeled and launched in Bubble.",
     "live": "",
     "github": "",
-    "len": 4
+    "len": 4,
+    "stack": ["Bubble"]
   },
   "uso": {
     "title": "USO",
     "image": "uso",
     "date": "2021",
     "tech": "Fullstack developer w/ Jaël Beining",
-    "description": "USO is a tool that allows you to synchronize your Osu & Spotify accounts to enhance your playlists. I originally worked mainly as a front-end developer, but I also helped with the front-end towards the end. Initially, the project was made using React & Symfony but I finished the project years later using Vue.js for the front-end & Node.js for the back-end.",
+    "description": "USO bridges osu! and Spotify so rhythm-game taste can inform playlist building. I joined early on UI, then came back years later to revive the app: a full rewrite with a Vue.js client and a Node.js API, replacing the original React and Symfony stack.",
     "live": "https://uso-psi.vercel.app/",
     "github": "https://github.com/lIlIllIIIIl/USO",
-    "len": 5
+    "len": 5,
+    "stack": ["Vue.js", "Node.js"]
   }
 }
