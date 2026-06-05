@@ -43,16 +43,16 @@
     "len": 8,
     "stack": ["Unity", "C#"]
   },
-  "aurore": {
-    "title": "Aurore",
-    "image": "aurore",
-    "date": "2021",
-    "tech": "Fullstack developer (low-code)",
-    "description": "A school brief on low-code delivery: a marketplace-style concept for renting houses and apartments curated from architects and interior designers. The entire product surface—listings, flows, and visuals—was modeled and launched in Bubble.",
-    "live": "",
+  "geo": {
+    "title": "GEO",
+    "image": "geo",
+    "date": "2026",
+    "tech": "Fullstack developer",
+    "description": "GEO est une web app Next.js conçue pour aider les marques à optimiser leur présence dans les réponses des intelligences artificielles génératives (ChatGPT, Gemini, Claude, etc.). La plateforme s'articule autour de deux axes : l'analyse de la présence & l'audit SEO/GEO qui permet de générer des recommandations concrètes.",
+    "live": "https://skop-one.vercel.app/",
     "github": "",
-    "len": 4,
-    "stack": ["Bubble"]
+    "len": 3,
+    "stack": ["React", "Node.js"]
   },
   "uso": {
     "title": "USO",
