@@ -225,9 +225,10 @@ onMounted(() => {
       cursor: pointer;
       color: inherit;
       white-space: pre;
+      transition: opacity 0.2s ease-out;
 
       &:hover {
-        opacity: .7;
+        opacity: .5;
       }
     }
 
