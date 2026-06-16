@@ -241,6 +241,10 @@ onMounted(() => {
 
   .work-content {
     padding-top: calc(var(--work-header-stack) + 2rem);
+
+    @media (max-width: 768px) {
+      padding-top: 2rem;
+    }
   }
 
   .work-left {

@@ -1,4 +1,15 @@
 {
+  "geo": {
+    "title": "GEO",
+    "image": "geo",
+    "date": "2026",
+    "tech": "Fullstack developer",
+    "description": "GEO is a Next.js web app designed to help brands optimize their visibility in responses from generative AI systems (ChatGPT, Gemini, Claude, etc.). The platform focuses on two key areas: visibility analysis and SEO/GEO audits, which generate actionable recommendations.",
+    "live": "https://skop-one.vercel.app/",
+    "github": "",
+    "len": 3,
+    "stack": ["React", "Node.js"]
+  },
   "memoria": {
     "title": "Memoria",
     "image": "memoria",
@@ -21,16 +32,16 @@
     "len": 5,
     "stack": ["Vue.js", "Node.js"]
   },
-  "cfdoc": {
-    "title": "cf.doc",
-    "image": "cfdoc",
-    "date": "2024",
-    "tech": "Fullstack developer w/ Yann Quillard",
-    "description": "Final-year capstone: an AI-assisted product for teams navigating internal technical documentation. I shipped the marketing site in Next.js and built the core experience—a side-by-side workspace that compares legacy docs with an AI-enriched version so differences and updates are easy to spot.",
-    "live": "",
-    "github": "",
+  "uso": {
+    "title": "USO",
+    "image": "uso",
+    "date": "2021",
+    "tech": "Fullstack developer w/ Jaël Beining",
+    "description": "USO bridges osu! and Spotify so rhythm-game taste can inform playlist building. I joined early on UI, then came back years later to revive the app: a full rewrite with a Vue.js client and a Node.js API, replacing the original React and Symfony stack.",
+    "live": "https://uso-psi.vercel.app/",
+    "github": "https://github.com/lIlIllIIIIl/USO",
     "len": 5,
-    "stack": ["Next.js", "Python", "Vue.js"]
+    "stack": ["Vue.js", "Node.js"]
   },
   "pimpim": {
     "title": "Pimpim's adventure",
@@ -43,26 +54,15 @@
     "len": 8,
     "stack": ["Unity", "C#"]
   },
-  "geo": {
-    "title": "GEO",
-    "image": "geo",
-    "date": "2026",
-    "tech": "Fullstack developer",
-    "description": "GEO est une web app Next.js conçue pour aider les marques à optimiser leur présence dans les réponses des intelligences artificielles génératives (ChatGPT, Gemini, Claude, etc.). La plateforme s'articule autour de deux axes : l'analyse de la présence & l'audit SEO/GEO qui permet de générer des recommandations concrètes.",
-    "live": "https://skop-one.vercel.app/",
+  "cfdoc": {
+    "title": "cf.doc",
+    "image": "cfdoc",
+    "date": "2024",
+    "tech": "Fullstack developer w/ Yann Quillard",
+    "description": "Final-year capstone: an AI-assisted product for teams navigating internal technical documentation. I shipped the marketing site in Next.js and built the core experience—a side-by-side workspace that compares legacy docs with an AI-enriched version so differences and updates are easy to spot.",
+    "live": "",
     "github": "",
-    "len": 3,
-    "stack": ["React", "Node.js"]
-  },
-  "uso": {
-    "title": "USO",
-    "image": "uso",
-    "date": "2021",
-    "tech": "Fullstack developer w/ Jaël Beining",
-    "description": "USO bridges osu! and Spotify so rhythm-game taste can inform playlist building. I joined early on UI, then came back years later to revive the app: a full rewrite with a Vue.js client and a Node.js API, replacing the original React and Symfony stack.",
-    "live": "https://uso-psi.vercel.app/",
-    "github": "https://github.com/lIlIllIIIIl/USO",
     "len": 5,
-    "stack": ["Vue.js", "Node.js"]
+    "stack": ["Next.js", "Python", "Vue.js"]
   }
 }
