@@ -183,7 +183,7 @@ onMounted(() => {
 
     @media (max-width: 768px) {
       flex-direction: column;
-      gap: 2rem;
+      gap: 1rem;
       padding: 0 2rem;
     }
   }
@@ -212,6 +212,10 @@ onMounted(() => {
     mix-blend-mode: exclusion;
     color: #ffffff;
     pointer-events: none;
+
+    @media (max-width: 768px) {
+      padding-top: 1rem;
+    }
 
     &__close {
       pointer-events: auto;
@@ -243,7 +247,7 @@ onMounted(() => {
     padding-top: calc(var(--work-header-stack) + 2rem);
 
     @media (max-width: 768px) {
-      padding-top: 2rem;
+      padding-top: 1rem;
     }
   }
 
@@ -256,6 +260,7 @@ onMounted(() => {
 
     @media (max-width: 768px) {
       gap: 0;
+      padding-top: calc(var(--work-header-stack) + .4rem);
     }
 
     &__preview {
