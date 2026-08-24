@@ -260,7 +260,7 @@ onMounted(() => {
 
     @media (max-width: 768px) {
       gap: 0;
-      padding-top: calc(var(--work-header-stack) + .4rem);
+      padding-top: calc(var(--work-header-stack) + 2rem);
     }
 
     &__preview {
