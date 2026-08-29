@@ -17,11 +17,14 @@ const SQUARES_BOTTOM = 3
 const projects = Object.values(works).slice(0, 6)
 
 const ANIMATION_DURATION = 650
-const MIN_LOADER_MS = 1000
 const LOADER_SQUARE_STAGGER_MS = 45
 // Aligné sur la durée CSS de transition des carrés (0.65s)
 const LOADER_SQUARE_TRANSITION_MS = 650
 const PAUSE_AFTER_LOADER_ENTRANCE_MS = 400
+const LOADER_PULSE_DURATION_MS = 1800
+const LOADER_PULSE_MIN_CYCLES = 2
+const LOADER_PULSE_SETTLE_MS = 350
+const LOADER_PULSE_REST_RATIO = 0.88
 const LOADER_ENTRANCE_TOTAL_MS =
   (SQUARES_TOP + SQUARES_BOTTOM - 1) * LOADER_SQUARE_STAGGER_MS +
   LOADER_SQUARE_TRANSITION_MS
@@ -33,7 +36,28 @@ const PROJECTS_ENTER_TOTAL_MS =
 let isUnmounted = false
 
 const loaderSquaresEntered = ref(false)
+const loaderEntranceComplete = ref(false)
+const isPageLoading = ref(false)
 let loaderEntranceStartedAt = 0
+let loaderPulseStartedAt = 0
+
+const loaderBreathing = computed(
+  () =>
+    loaderSquaresEntered.value &&
+    loaderEntranceComplete.value &&
+    isPageLoading.value &&
+    !isAnimating.value
+)
+
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+function waitForEntranceEnd() {
+  const elapsed =
+    loaderEntranceStartedAt > 0 ? Date.now() - loaderEntranceStartedAt : 0
+  return wait(Math.max(0, LOADER_ENTRANCE_TOTAL_MS - elapsed))
+}
 
 function preloadImage(src) {
   return new Promise((resolve) => {
@@ -52,15 +76,55 @@ async function preloadHomeMedia() {
   await Promise.all(urls.map(preloadImage))
 }
 
-async function runLoaderSequence() {
-  const start = Date.now()
-  await preloadHomeMedia()
+function waitForLoaderPulseRest() {
+  if (loaderPulseStartedAt <= 0) {
+    return Promise.resolve()
+  }
+
+  const elapsed = Date.now() - loaderPulseStartedAt
+  const remainder = elapsed % LOADER_PULSE_DURATION_MS
+  const ratio = remainder / LOADER_PULSE_DURATION_MS
+
+  if (ratio >= LOADER_PULSE_REST_RATIO || ratio <= 0.06) {
+    return Promise.resolve()
+  }
+
+  return wait((LOADER_PULSE_REST_RATIO - ratio) * LOADER_PULSE_DURATION_MS)
+}
+
+async function stopLoaderPulseForIntro() {
+  if (!isPageLoading.value) {
+    return
+  }
+
+  await waitForLoaderPulseRest()
   if (isUnmounted) {
     return
   }
-  const elapsed = Date.now() - start
-  const remaining = Math.max(0, MIN_LOADER_MS - elapsed)
-  await new Promise((resolve) => setTimeout(resolve, remaining))
+
+  isPageLoading.value = false
+  await nextTick()
+
+  const squares = document.querySelectorAll('.home__square')
+  squares.forEach((square) => {
+    const { transform } = getComputedStyle(square)
+    square.getAnimations().forEach((animation) => animation.cancel())
+    if (transform && transform !== 'none') {
+      square.style.transform = transform
+    }
+  })
+
+  await new Promise((resolve) => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(resolve)
+    })
+  })
+
+  squares.forEach((square) => {
+    square.style.transform = ''
+  })
+
+  await wait(LOADER_PULSE_SETTLE_MS)
 }
 
 function triggerIntroAnimation() {
@@ -76,6 +140,20 @@ function triggerIntroAnimation() {
     // Menus (App) et apparition des projets : même instant que le début du fade-in
     completeHomeIntro?.()
   }, ANIMATION_DURATION)
+}
+
+async function finishLoaderAndIntro() {
+  await stopLoaderPulseForIntro()
+  if (isUnmounted) {
+    return
+  }
+
+  await new Promise((resolve) => setTimeout(resolve, PAUSE_AFTER_LOADER_ENTRANCE_MS))
+  if (isUnmounted) {
+    return
+  }
+
+  triggerIntroAnimation()
 }
 
 watch(showProjects, (visible) => {
@@ -116,6 +194,8 @@ onMounted(async () => {
     return
   }
 
+  isPageLoading.value = true
+
   await nextTick()
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
@@ -126,25 +206,31 @@ onMounted(async () => {
     })
   })
 
-  await runLoaderSequence()
+  const preloadPromise = preloadHomeMedia()
+
+  await waitForEntranceEnd()
   if (isUnmounted) {
     return
   }
 
-  const elapsedSinceEntrance =
-    loaderEntranceStartedAt > 0 ? Date.now() - loaderEntranceStartedAt : 0
-  const waitEntranceEnd = Math.max(0, LOADER_ENTRANCE_TOTAL_MS - elapsedSinceEntrance)
-  await new Promise((resolve) => setTimeout(resolve, waitEntranceEnd))
+  loaderEntranceComplete.value = true
+  loaderPulseStartedAt = Date.now()
+
+  await preloadPromise
   if (isUnmounted) {
     return
   }
 
-  await new Promise((resolve) => setTimeout(resolve, PAUSE_AFTER_LOADER_ENTRANCE_MS))
+  const minPulseTime = LOADER_PULSE_DURATION_MS * LOADER_PULSE_MIN_CYCLES
+  const pulseElapsed = Date.now() - loaderPulseStartedAt
+  if (pulseElapsed < minPulseTime) {
+    await wait(minPulseTime - pulseElapsed)
+  }
   if (isUnmounted) {
     return
   }
 
-  triggerIntroAnimation()
+  await finishLoaderAndIntro()
 })
 
 onUnmounted(() => {
@@ -168,7 +254,10 @@ onUnmounted(() => {
     <div
       v-if="!showProjects"
       class="home__center"
-      :class="{ 'home__center--squares-in': loaderSquaresEntered }"
+      :class="{
+        'home__center--squares-in': loaderSquaresEntered,
+        'home__center--loader-pulse': loaderBreathing,
+      }"
     >
       <div class="home__squares home__squares--top">
         <div
@@ -180,6 +269,9 @@ onUnmounted(() => {
             i === 1 && 'home__square--enter-far',
             i === 2 && 'home__square--enter-mid',
             i === 3 && 'home__square--enter-near',
+            i === 3 && 'home__square--pulse-near',
+            i === 2 && 'home__square--pulse-mid',
+            i === 1 && 'home__square--pulse-far',
             isAnimating && i === 1 && 'home__square--ease-in',
             isAnimating && i === 2 && 'home__square--ease-none',
             isAnimating && i === 3 && 'home__square--ease-out',
@@ -209,6 +301,9 @@ onUnmounted(() => {
             i === 1 && 'home__square--enter-near',
             i === 2 && 'home__square--enter-mid',
             i === 3 && 'home__square--enter-far',
+            i === 1 && 'home__square--pulse-near',
+            i === 2 && 'home__square--pulse-mid',
+            i === 3 && 'home__square--pulse-far',
             isAnimating && i === 1 && 'home__square--ease-out',
             isAnimating && i === 2 && 'home__square--ease-none',
             isAnimating && i === 3 && 'home__square--ease-in',
@@ -308,6 +403,178 @@ onUnmounted(() => {
 .home__center--squares-in .home__text:not(.home__text--hidden) {
   opacity: 1;
   transition: opacity 0.55s ease-out 0.12s;
+}
+
+$loader-pulse-offset: 4px;
+$loader-pulse-duration: 1.8s;
+$loader-pulse-easing: ease-in-out;
+
+// Cycle continu : inspiration (near → far), expiration (far → near), courte pause en fin
+@keyframes loader-breathe-top-near {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  12% {
+    transform: translate3d(0, $loader-pulse-offset, 0);
+  }
+
+  45% {
+    transform: translate3d(0, $loader-pulse-offset, 0);
+  }
+
+  88% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes loader-breathe-top-mid {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  8% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  22% {
+    transform: translate3d(0, $loader-pulse-offset, 0);
+  }
+
+  45% {
+    transform: translate3d(0, $loader-pulse-offset, 0);
+  }
+
+  82% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes loader-breathe-top-far {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  16% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  32% {
+    transform: translate3d(0, $loader-pulse-offset, 0);
+  }
+
+  45% {
+    transform: translate3d(0, $loader-pulse-offset, 0);
+  }
+
+  75% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes loader-breathe-bottom-near {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  12% {
+    transform: translate3d(0, -$loader-pulse-offset, 0);
+  }
+
+  45% {
+    transform: translate3d(0, -$loader-pulse-offset, 0);
+  }
+
+  88% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes loader-breathe-bottom-mid {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  8% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  22% {
+    transform: translate3d(0, -$loader-pulse-offset, 0);
+  }
+
+  45% {
+    transform: translate3d(0, -$loader-pulse-offset, 0);
+  }
+
+  82% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes loader-breathe-bottom-far {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  16% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  32% {
+    transform: translate3d(0, -$loader-pulse-offset, 0);
+  }
+
+  45% {
+    transform: translate3d(0, -$loader-pulse-offset, 0);
+  }
+
+  75% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.home__center--loader-pulse {
+  .home__square {
+    transition-property: opacity;
+    transition-duration: 0.65s;
+    transition-delay: 0s;
+    will-change: transform;
+  }
+
+  .home__squares--top .home__square--pulse-near {
+    animation: loader-breathe-top-near $loader-pulse-duration $loader-pulse-easing infinite;
+  }
+
+  .home__squares--top .home__square--pulse-mid {
+    animation: loader-breathe-top-mid $loader-pulse-duration $loader-pulse-easing infinite;
+  }
+
+  .home__squares--top .home__square--pulse-far {
+    animation: loader-breathe-top-far $loader-pulse-duration $loader-pulse-easing infinite;
+  }
+
+  .home__squares--bottom .home__square--pulse-near {
+    animation: loader-breathe-bottom-near $loader-pulse-duration $loader-pulse-easing infinite;
+  }
+
+  .home__squares--bottom .home__square--pulse-mid {
+    animation: loader-breathe-bottom-mid $loader-pulse-duration $loader-pulse-easing infinite;
+  }
+
+  .home__squares--bottom .home__square--pulse-far {
+    animation: loader-breathe-bottom-far $loader-pulse-duration $loader-pulse-easing infinite;
+  }
+}
+
+.home__center--squares-in:not(.home__center--loader-pulse) .home__square:not(.home__square--animate) {
+  transform: translate3d(0, 0, 0);
 }
 
 .home__squares {
@@ -415,7 +682,7 @@ onUnmounted(() => {
     grid-template-columns: 1fr;
     align-content: start;
     justify-items: center;
-    padding-top: 5rem;
+    padding-top: 8rem;
     overflow-y: auto;
   }
 }

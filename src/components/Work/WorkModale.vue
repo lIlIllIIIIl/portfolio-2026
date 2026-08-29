@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
 import ScrollPreview from './ScrollPreview.vue'
+import TechStackChip from './TechStackChip.vue'
 
 defineProps({
   work: { type: Object, required: true },
@@ -70,7 +71,14 @@ onMounted(() => {
           <div class="work-content">
             <div class="work-right">
               <div class="work-right__description">
-                <p>{{ work.description }}</p>
+                <div class="work-right__description-main">
+                  <p>{{ work.description }}</p>
+                  <ul v-if="work.stack?.length" class="work-right__stack">
+                    <li v-for="item in work.stack" :key="item" class="work-right__stack-item">
+                      <TechStackChip :label="item" />
+                    </li>
+                  </ul>
+                </div>
 
                 <div class="work-right_live_container">
                   <a
@@ -135,7 +143,9 @@ onMounted(() => {
 }
 
 .work-container {
+  --work-header-stack: clamp(5rem, 3.25rem + 6vmin, 6.75rem);
   position: fixed;
+  isolation: isolate;
   z-index: 900;
   background-color: #fff;
   color: black;
@@ -151,8 +161,8 @@ onMounted(() => {
   transition: transform 0.3s ease-in-out;
 
   @media (max-width: 768px) {
-        width: 100vw;
-      }
+    width: 100vw;
+  }
 
   &--opening {
     transform: translateX(0);
@@ -169,12 +179,12 @@ onMounted(() => {
     flex-direction: row;
     justify-content: space-between;
     gap: 2rem;
-    padding: 0 2rem 2rem;
+    padding: 0 2rem;
 
     @media (max-width: 768px) {
       flex-direction: column;
-      gap: 2rem;
-      padding: 0 2rem 2rem;
+      gap: 1rem;
+      padding: 0 2rem;
     }
   }
 
@@ -183,11 +193,17 @@ onMounted(() => {
     min-width: 0;
     min-height: 0;
     overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
   }
 
   .work-header {
-    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 15;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -195,13 +211,14 @@ onMounted(() => {
     padding: 2rem 2rem 0;
     mix-blend-mode: exclusion;
     color: #ffffff;
+    pointer-events: none;
 
-    &__title {
-      font-size: 2rem;
-      font-weight: 400;
+    @media (max-width: 768px) {
+      padding-top: 1rem;
     }
 
     &__close {
+      pointer-events: auto;
       font-family: "Geist Mono";
       font-size: 0.75rem;
       font-weight: 500;
@@ -212,29 +229,43 @@ onMounted(() => {
       cursor: pointer;
       color: inherit;
       white-space: pre;
+      transition: opacity 0.2s ease-out;
 
       &:hover {
-        opacity: .7;
+        opacity: .5;
       }
     }
+
+    &__title {
+      font-size: 2rem;
+      font-weight: 400;
+    }
+
   }
 
   .work-content {
-    padding-top: 2rem;
+    padding-top: calc(var(--work-header-stack) + 2rem);
+
+    @media (max-width: 768px) {
+      padding-top: 1rem;
+    }
   }
 
   .work-left {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 10vh;
-    padding-top: 2rem;
+    padding-top: calc(var(--work-header-stack) + 2rem);
 
     @media (max-width: 768px) {
       gap: 0;
+      padding-top: calc(var(--work-header-stack) + 2rem);
     }
 
     &__preview {
       width: 10rem;
+      margin-bottom: 2rem;
 
       @media (max-width: 768px) {
         display: none;
@@ -274,22 +305,35 @@ onMounted(() => {
     min-width: 0;
 
     @media (max-width: 768px) {
-        gap: 2rem;
-      }
+      gap: 2rem;
+      flex: none;
+    }
 
     &__description {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+      align-items: flex-start;
+      gap: 1.5rem;
 
       @media (max-width: 768px) {
         flex-direction: column;
         gap: 1rem;
       }
 
-      p {
+      &-main {
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
         max-width: 25rem;
-        color: black;
+        min-width: 0;
+        flex-shrink: 1;
+
+        > p:first-of-type {
+          margin: 0;
+          max-width: 100%;
+          color: black;
+        }
       }
 
       &__cta {
@@ -348,6 +392,32 @@ onMounted(() => {
           height: 1.2rem;
           flex-shrink: 0;
         }
+      }
+    }
+
+    &__stack {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.55rem;
+      margin: 0;
+      padding: 0;
+      max-width: 100%;
+      list-style: none;
+    }
+
+    &__stack-item {
+      display: inline-flex;
+      align-items: center;
+
+      &:not(:last-child)::after {
+        content: '·';
+        margin-left: 0.55rem;
+        font-family: 'Geist Mono', ui-monospace, monospace;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: #00000030;
+        user-select: none;
       }
     }
 
